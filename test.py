@@ -17,26 +17,30 @@ def get_date(date_entry):
  
     day_of_year = int(converted_date.strftime('%j'))
  
-    if day_of_year >= 172 and day_of_year <355:
+    if day_of_year >= 172 and day_of_year <=355:
         x =  day_of_year -172
         return x
     elif day_of_year < 172:
-        x = 355 - (365 + day_of_year)
+        # x = 355 - (365 + day_of_year)
+        x= 172 - day_of_year
         return x
-    elif day_of_year >= 355:
-        x = 355 - day_of_year
+    elif day_of_year > 355:
+        x = 172 - (day_of_year -355)
+        print(x)
         return x
 
 def daily_sunrise_diff():
     FMT = '%H:%M:%S'
     tdelta_rise = datetime.strptime(late_sunrise, FMT) - datetime.strptime(early_sunrise, FMT)
-    avg_tdelta_rise = tdelta_rise / 172
+    # 183 days between 21st of June and 21st od December
+    avg_tdelta_rise = tdelta_rise / 183 
     return avg_tdelta_rise
     
 def daily_sunset_diff():
     FMT = '%H:%M:%S'
     tdelta_set = datetime.strptime(late_sunset, FMT) - datetime.strptime(str(early_sunset), FMT)
-    avg_tdelta_set = tdelta_set / 172
+    # 183 days between 21st of June and 21st od December
+    avg_tdelta_set = tdelta_set / 183
     return avg_tdelta_set
 
 def calculate_suntime(avg_sunset):
